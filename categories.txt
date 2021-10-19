@@ -1,0 +1,33 @@
+:animals 
+    horse
+    rabbit
+    elephant
+    giraffe
+    hippopotamus
+:sports
+    badminton
+    football
+    rugby
+    archery
+    pingpong
+:food
+    pizza
+    hamburger
+    banana
+    rice
+    hotdog
+:countries
+    japan
+    lithuania
+    russia
+    malaysia
+    mexico
+    peru
+    indonesia
+:vehicles
+    airplane
+    car
+    van
+    bicycle
+    motorcycle
+    boat
