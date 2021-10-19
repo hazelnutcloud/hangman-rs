@@ -1,5 +1,4 @@
 # Hangman in rust
-*
 
 ![Screenshot from 2021-10-19 22-57-14.png](https://i.imgur.com/i6JEUvl.png)
 
