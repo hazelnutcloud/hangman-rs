@@ -1,8 +1,10 @@
 [package]
-name = "hangman"
-version = "0.1.0"
+name = "hangmanrs"
+version = "0.1.2"
 edition = "2018"
 author = "https://twitter.com/hsnmkls"
+description = "Hangman in your terminal"
+license = "MIT OR Apache-2.0"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 

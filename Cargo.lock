@@ -20,8 +20,8 @@ dependencies = [
 ]
 
 [[package]]
-name = "hangman"
-version = "0.1.0"
+name = "hangmanrs"
+version = "0.1.2"
 dependencies = [
  "rand",
 ]
