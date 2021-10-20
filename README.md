@@ -12,7 +12,9 @@ The classic hangman game implemented in Rust.
 $ cargo install hangmanrs
 $ hangmanrs
 ```
+
 * * *
+
 [Github](https://github.com/hazelnutcloud/hangman-rs)
 
 * * *
