@@ -1,5 +1,44 @@
-use std::{ fs, error::Error, io, process };
+use std::{ error::Error, io, process };
 use rand::Rng;
+
+mod words {
+    pub fn list() -> String {
+        String::from(
+    ":animals
+        horse
+        rabbit
+        elephant
+        giraffe
+        hippopotamus
+    :sports
+        badminton
+        football
+        rugby
+        archery
+        pingpong
+    :food
+        pizza
+        hamburger
+        banana
+        rice
+        hotdog
+    :countries
+        japan
+        lithuania
+        russia
+        malaysia
+        mexico
+        peru
+        indonesia
+    :vehicles
+        airplane
+        car
+        van
+        bicycle
+        motorcycle
+        boat")
+    }
+}
 
 struct Config {
     category: String,
@@ -47,7 +86,7 @@ fn display_welcome_message() {
 }
 
 fn get_and_display_categories_list() -> Result<Vec<String>, Box<dyn Error>> {
-    let categories = fs::read_to_string("./categories.txt")?;
+    let categories = words::list();
     
     println!("Choose a category:\n");
 
@@ -83,7 +122,7 @@ fn parse_config(categories_list: Vec<String>) -> Result<Config, Box<dyn Error>> 
 }
 
 fn secret_word(category_chosen: &str) -> String {
-    let categories = fs::read_to_string("./categories.txt").unwrap();
+    let categories = words::list();
     let mut result = String::new();
 
     for category_and_words in categories.as_str().split(':') {
