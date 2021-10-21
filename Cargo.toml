@@ -1,6 +1,6 @@
 [package]
 name = "hangmanrs"
-version = "0.1.3"
+version = "0.1.4"
 edition = "2018"
 author = "https://twitter.com/hsnmkls"
 description = "Hangman in your terminal"
