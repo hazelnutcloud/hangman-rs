@@ -92,12 +92,9 @@ fn get_and_display_categories_list() -> Result<Vec<String>, Box<dyn Error>> {
 
     let mut categories_list = vec![];
     for category in categories.as_str().split(':') {
-        match category.lines().next() {
-            Some(name) => {
-                println!("-- {}", name);
-                categories_list.push(name.trim().to_string());
-            },
-            None => (),
+        if let Some(name) = category.lines().next() {
+            println!("-- {}", name);
+            categories_list.push(name.trim().to_string());
         }
     }
 
@@ -298,7 +295,7 @@ fn loop_game(config: Config) {
             println!("the correct answer was {}!", config.secret_word);
             process::exit(0);
         }
-        if &display_letters.join("") == &config.secret_word {
+        if display_letters.join("") == config.secret_word {
             println!("YOU WON!");
             process::exit(0);
         }
@@ -308,7 +305,7 @@ fn loop_game(config: Config) {
         match parse_guess(&config.secret_word, &mut letters_guessed) {
             Guess::Correct{ letter, correct_indices } => {
                 for index in correct_indices {
-                    display_letters[index] = format!("{}", letter);
+                    display_letters[index] = letter.to_string();
                 }
                 score.add_twenty();
             },
