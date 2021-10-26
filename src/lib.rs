@@ -1,10 +1,10 @@
-use std::{ error::Error, io, process };
 use rand::Rng;
+use std::{error::Error, io, process};
 
 mod words {
     pub fn list() -> String {
         String::from(
-    ":animals
+            ":animals
         horse
         rabbit
         elephant
@@ -36,7 +36,8 @@ mod words {
         van
         bicycle
         motorcycle
-        boat")
+        boat",
+        )
     }
 }
 
@@ -80,14 +81,14 @@ fn display_welcome_message() {
 
                  press ENTER to start the game!
 
---------------------------------------------------------------";                 
+--------------------------------------------------------------";
 
     println!("{}", HANGMAN);
 }
 
 fn get_and_display_categories_list() -> Result<Vec<String>, Box<dyn Error>> {
     let categories = words::list();
-    
+
     println!("Choose a category:\n");
 
     let mut categories_list = vec![];
@@ -139,13 +140,13 @@ fn secret_word(category_chosen: &str) -> String {
 
 fn display_hangman(tries: usize) {
     let hangman = [
-"\
+        "\
 \n
 \n       
 \n     
 \n           
 _____",
-"\
+        "\
   _
  |      
  |      
@@ -154,7 +155,7 @@ _____",
  |      
  |
 _|___",
-"\
+        "\
  ________
  |/      
  |      
@@ -163,7 +164,7 @@ _|___",
  |      
  |
 _|___",
-"\
+        "\
  ________
  |/     |
  |      
@@ -172,7 +173,7 @@ _|___",
  |      
  |
 _|___",
-"\
+        "\
  ________
  |/     |
  |     (_)
@@ -181,7 +182,7 @@ _|___",
  |      
  |
 _|___",
-"\
+        "\
  ________
  |/     |
  |     (_)
@@ -190,7 +191,7 @@ _|___",
  |      
  |
 _|___",
-"\
+        "\
  ________
  |/     |
  |     (_)
@@ -199,7 +200,7 @@ _|___",
  |      
  |
 _|___",
-"\
+        "\
  ________
  |/     |
  |     (_)
@@ -208,7 +209,7 @@ _|___",
  |      
  |
 _|___",
-"\
+        "\
  ________
  |/     |
  |     (_)
@@ -216,8 +217,8 @@ _|___",
  |      |
  |     / 
  |
-_|___",    
-"\
+_|___",
+        "\
  ________
  |/     |
  |     (_)
@@ -225,7 +226,8 @@ _|___",
  |      |
  |     / \\
  |
-_|___",];
+_|___",
+    ];
 
     println!("{}\n", hangman[tries]);
 }
@@ -259,9 +261,9 @@ fn parse_guess(secret_word: &str, letters_guessed: &mut Vec<String>) -> Guess {
             if char == guess_char {
                 correct_index.push(index);
                 correct_guess = true;
-            }            
+            }
         }
-    };
+    }
     if correct_guess {
         Guess::Correct {
             letter: guess.to_string(),
@@ -273,12 +275,11 @@ fn parse_guess(secret_word: &str, letters_guessed: &mut Vec<String>) -> Guess {
 }
 
 fn loop_game(config: Config) {
-    
     let mut score = Score {
         points: 0,
         tries: 0,
     };
-    
+
     let mut display_letters = vec!["_".to_string(); config.secret_word.len()];
     let mut letters_guessed: Vec<String> = vec![];
 
@@ -287,7 +288,7 @@ fn loop_game(config: Config) {
         display_hangman(score.tries);
         println!("{}\n", display_letters.join(" "));
         println!("points: {}", score.points);
-        println!("tries remaining: {}", 9-score.tries);
+        println!("tries remaining: {}", 9 - score.tries);
         println!("letters guessed: {}\n", letters_guessed.join(" "));
 
         if score.tries == 9 {
@@ -303,25 +304,28 @@ fn loop_game(config: Config) {
         println!("enter your guess: ");
 
         match parse_guess(&config.secret_word, &mut letters_guessed) {
-            Guess::Correct{ letter, correct_indices } => {
+            Guess::Correct {
+                letter,
+                correct_indices,
+            } => {
                 for index in correct_indices {
                     display_letters[index] = letter.to_string();
                 }
                 score.add_twenty();
-            },
+            }
             Guess::Incorrect => {
                 score.subtract_twenty();
                 score.add_try();
-            },
+            }
             Guess::Pass => (),
         }
     }
 }
 
-pub fn run() -> Result<(), Box<dyn Error>>{
+pub fn run() -> Result<(), Box<dyn Error>> {
     print!("\x1B[2J\x1B[1;1H");
     display_welcome_message();
-    
+
     let mut skip = String::new();
     io::stdin().read_line(&mut skip).unwrap();
     print!("\x1B[2J\x1B[1;1H");
@@ -331,9 +335,11 @@ pub fn run() -> Result<(), Box<dyn Error>>{
 
     let config = parse_config(categories_list)?;
 
-    println!("\nyou have chosen category {}. good luck!\n", config.category);
+    println!(
+        "\nyou have chosen category {}. good luck!\n",
+        config.category
+    );
 
     loop_game(config);
     Ok(())
 }
-
